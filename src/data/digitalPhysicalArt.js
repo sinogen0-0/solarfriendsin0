@@ -40,10 +40,7 @@ import shapeForm from '../images/digital_art/shape_form.mp4';
 import shinyBloob from '../images/digital_art/ShinyBloob.avi';
 import spaceman from '../images/digital_art/spaceman.mp4';
 import spinFin from '../images/digital_art/spin_fin.mp4';
-import woman from '../images/digital_art/woman.mp4';
 import colorShapeFluid from '../images/digital_art/_color_shape_fluid.avi';
-import finalGallery from '../images/digital_art/_final_gallery.mp4';
-import finalWithTitle from '../images/digital_art/_final_with_title.mp4';
 
 // Physical Art
 import physicalArt1 from '../images/physical_art/000.jpg';
@@ -304,26 +301,6 @@ const digitalPhysicalArt = [
     },
     {
         id: 30,
-        title: "Final With Title",
-        videoUrl: finalWithTitle,
-        imageUrl: finalWithTitle,
-        description: "Complete animation with titles.",
-        medium: "Digital Animation",
-        year: "2024",
-        isVideo: true
-    },
-    {
-        id: 31,
-        title: "Final Gallery",
-        videoUrl: finalGallery,
-        imageUrl: finalGallery,
-        description: "Virtual gallery walkthrough.",
-        medium: "3D Animation",
-        year: "2024",
-        isVideo: true
-    },
-    {
-        id: 32,
         title: "Color Shape Fluid",
         videoUrl: colorShapeFluid,
         imageUrl: colorShapeFluid,
@@ -333,17 +310,7 @@ const digitalPhysicalArt = [
         isVideo: true
     },
     {
-        id: 33,
-        title: "Woman",
-        videoUrl: woman,
-        imageUrl: woman,
-        description: "Portrait animation study.",
-        medium: "Digital Animation",
-        year: "2024",
-        isVideo: true
-    },
-    {
-        id: 34,
+        id: 31,
         title: "Untitled",
         imageUrl: untitled,
         description: "Experimental digital piece.",
@@ -351,7 +318,7 @@ const digitalPhysicalArt = [
         year: "2024"
     },
     {
-        id: 35,
+        id: 32,
         title: "Spin Fin",
         videoUrl: spinFin,
         imageUrl: spinFin,
@@ -361,7 +328,7 @@ const digitalPhysicalArt = [
         isVideo: true
     },
     {
-        id: 36,
+        id: 33,
         title: "Spaceman",
         videoUrl: spaceman,
         imageUrl: spaceman,
@@ -371,7 +338,7 @@ const digitalPhysicalArt = [
         isVideo: true
     },
     {
-        id: 37,
+        id: 34,
         title: "Shape Form",
         videoUrl: shapeForm,
         imageUrl: shapeForm,
@@ -381,7 +348,7 @@ const digitalPhysicalArt = [
         isVideo: true
     },
     {
-        id: 38,
+        id: 35,
         title: "Ripuh",
         videoUrl: ripuh,
         imageUrl: ripuh,
@@ -391,7 +358,7 @@ const digitalPhysicalArt = [
         isVideo: true
     },
     {
-        id: 39,
+        id: 36,
         title: "Poster",
         imageUrl: poster,
         description: "Digital poster art.",
@@ -399,7 +366,7 @@ const digitalPhysicalArt = [
         year: "2024"
     },
     {
-        id: 40,
+        id: 37,
         title: "Phil0s0pher",
         videoUrl: philosopher,
         imageUrl: philosopher,
@@ -409,7 +376,7 @@ const digitalPhysicalArt = [
         isVideo: true
     },
     {
-        id: 41,
+        id: 38,
         title: "Man Wings Animation",
         videoUrl: manWingsVideo,
         imageUrl: manWingsVideo,
@@ -419,7 +386,7 @@ const digitalPhysicalArt = [
         isVideo: true
     },
     {
-        id: 42,
+        id: 39,
         title: "Man Wings",
         imageUrl: manWings,
         description: "Surreal digital portrait with wings.",
@@ -427,7 +394,7 @@ const digitalPhysicalArt = [
         year: "2024"
     },
     {
-        id: 43,
+        id: 40,
         title: "Physical Art Piece",
         imageUrl: physicalArt1,
         description: "Traditional physical artwork.",
