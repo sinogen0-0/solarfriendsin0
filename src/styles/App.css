@@ -1,0 +1,408 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #101920;
+    color: #cbd9e6;
+    font-family: 'Cascadia Code', 'Cascadia Mono', 'JetBrains Mono', 'Fira Code', monospace;
+    position: relative;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+.main-title {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    font-size: 5rem;
+    color: #cbd9e6;
+    margin: 0;
+    letter-spacing: 0.1em;
+    font-family: 'Cascadia Code', 'Cascadia Mono', 'JetBrains Mono', 'Fira Code', monospace;
+    position: relative;
+    font-weight: 700;
+}
+
+.about-list {
+    margin: 0.5rem 0 1rem 1.5rem;
+    padding: 0;
+    line-height: 2;
+    color: #cbd9e6;
+}
+
+.about-list li {
+    margin-bottom: 0.5rem;
+}
+
+.pottery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.pottery-item {
+    position: relative;
+    background: #101920;
+    border: 1px solid #cbd9e6;
+    transition: all 0.2s ease;
+    overflow: hidden;
+}
+
+.pottery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: all 0.3s ease;
+    filter: none;
+}
+
+.pottery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(107, 88, 118, 0.5);
+    border-color: #6b5876;
+    z-index: 2;
+}
+
+.pottery-item:hover img {
+    filter: none;
+}
+
+.App {
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-bottom: 160px;
+    position: relative;
+}
+
+.artist-button-container {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.artist-info-button {
+    background: transparent;
+    border: 2px solid #cbd9e6;
+    color: #cbd9e6;
+    padding: 0.8rem 2rem;
+    font-family: 'Cascadia Code', 'Cascadia Mono', 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.artist-info-button:hover {
+    background: #6b5876;
+    color: #cbd9e6;
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0 #cbd9e6;
+}
+
+.artist-info-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(16, 25, 32, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.artist-info-content {
+    background: #101920;
+    border: 2px solid #6b5876;
+    padding: 2.5rem;
+    max-width: 800px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(107, 88, 118, 0.5);
+}
+
+.artist-info-content h2 {
+    color: #cbd9e6;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.about-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.about-portrait {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-portrait img {
+    max-width: 350px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 2px solid #6b5876;
+    box-shadow: 0 4px 12px rgba(107, 88, 118, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.about-portrait img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 16px rgba(107, 88, 118, 0.6);
+}
+
+.about-details {
+    flex: 1;
+    width: 100%;
+}
+
+.contact-info {
+    text-align: center;
+}
+
+.contact-info h3 {
+    color: #cbd9e6;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 1.3rem;
+}
+
+.about-description {
+    margin: 1rem 0 1.5rem;
+    line-height: 1.8;
+    color: #cbd9e6;
+    font-size: 1.05rem;
+}
+
+.contact-links {
+    margin-top: 1.5rem;
+}
+
+.contact-links p {
+    margin: 0.75rem 0;
+    line-height: 1.8;
+    color: #cbd9e6;
+    font-size: 1rem;
+}
+
+.contact-links strong {
+    color: #8a9ba8;
+}
+
+/* Responsive layout for wider screens */
+@media (min-width: 768px) {
+    .artist-info-content {
+        max-width: 900px;
+        padding: 3rem;
+    }
+    
+    .about-layout {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 3rem;
+    }
+    
+    .about-portrait {
+        flex-basis: 40%;
+    }
+    
+    .about-details {
+        flex-basis: 60%;
+    }
+    
+    .contact-info {
+        text-align: left;
+    }
+    
+    .about-portrait img {
+        max-width: 100%;
+    }
+}
+
+.close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: #cbd9e6;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.close-button:hover {
+  background: #6b5876;
+  color: #cbd9e6;
+  transform: translateY(-1px);
+  box-shadow: 4px 4px 0 #cbd9e6;
+}
+
+.card-stack {
+  position: relative;
+  width: 38.2vh;
+  height: 38.2vh;
+  margin: 40px auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #101920;
+  border: 2px solid #cbd9e6;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  font-family: 'Cascadia Code', 'Cascadia Mono', 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cbd9e6;
+  padding: 0.8rem 2rem;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 #6b5876;
+  background: #6b5876;
+  color: #cbd9e6;
+}
+
+.card-1 {
+  transform: translate(-12px, -12px) scale(0.98);
+  z-index: 4;
+}
+
+.card-2 {
+  transform: translate(-4px, -4px) scale(0.98);
+  z-index: 3;
+}
+
+.card-3 {
+  transform: translate(4px, 4px) scale(0.98);
+  z-index: 2;
+}
+
+.card-4 {
+  transform: translate(12px, 12px) scale(0.98);
+  z-index: 1;
+}
+
+.card-stack.expanded {
+  width: 50vw;
+  height: 50vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.card-stack.expanded .card {
+  position: absolute;
+  width: 45%;
+  height: 45%;
+  aspect-ratio: 1 / 1;
+  margin: 0;
+  transform: scale(1);
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(107, 88, 118, 0.4);
+  background: #101920;
+  color: #cbd9e6;
+}
+
+.card-stack.expanded.transitioning .card {
+    background-color: #101920;
+    color: #cbd9e6;
+}
+
+.card-stack.expanded .card-1 {
+  transform: translate(-52%, -52%) scale(1);
+}
+
+.card-stack.expanded .card-2 {
+  transform: translate(52%, -52%) scale(1);
+}
+
+.card-stack.expanded .card-3 {
+  transform: translate(-52%, 52%) scale(1);
+}
+
+.card-stack.expanded .card-4 {
+  transform: translate(52%, 52%) scale(1);
+}
+
+.card-stack.expanded .card:hover {
+  background: #6b5876;
+  color: #cbd9e6;
+  box-shadow: 4px 4px 0 #cbd9e6;
+  z-index: 5;
+}
+
+.view-container {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    animation: fadeIn 0.3s ease;
+}
+
+.view-container.fade-out {
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "solarfriend-enchantments",
+  "version": "1.0.0",
+  "description": "Solar Friend Sin0's Enchantments & Other Magical Wares - Showcasing ceramic art, digital & physical art, music, and the Dungeon Deck Recorder app.",
+  "main": "src/App.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "build": "react-scripts build",
+    "build-linux": "react-scripts build && mv build/* ./ && rm -rf build"
+  },
+  "keywords": [
+    "art",
+    "gallery",
+    "ceramics",
+    "music",
+    "react"
+  ],
+  "author": "Jacob Pierce",
+  "license": "",
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^7.0.2",
+    "framer-motion": "^12.7.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-lazyload": "^3.2.1",
+    "react-router-dom": "^7.5.1",
+    "react-scripts": "^5.0.1"
+  },
+  "homepage": "./",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "sharp": "^0.34.1"
+  }
+}
