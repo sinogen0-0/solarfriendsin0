@@ -47,15 +47,13 @@ const BaseGrid = ({ data, onBack }) => {
                     >
                         <LazyLoad height={200} offset={100} once>
                             {item.isVideo ? (
-                                <video 
-                                    src={item.videoUrl || item.imageUrl} 
-                                    muted 
-                                    loop 
-                                    playsInline
-                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                />
+                                item.previewUrl ? (
+                                    <img src={item.previewUrl} alt={`${item.title} preview`} loading="lazy" decoding="async" />
+                                ) : (
+                                    <div className="video-preview-placeholder">Video</div>
+                                )
                             ) : (
-                                <img src={item.previewUrl || item.imageUrl} alt={item.title} />
+                                <img src={item.previewUrl || item.imageUrl} alt={item.title} loading="lazy" decoding="async" />
                             )}
                         </LazyLoad>
                     </div>
@@ -70,6 +68,8 @@ const BaseGrid = ({ data, onBack }) => {
                                         controls 
                                         autoPlay 
                                         loop
+                                        preload="metadata"
+                                        poster={selectedImage.previewUrl}
                                         style={{ maxWidth: '100%', maxHeight: '80vh' }}
                                     />
                                 ) : (

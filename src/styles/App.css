@@ -204,6 +204,25 @@ body {
     margin-top: 1.5rem;
 }
 
+.contact-lock {
+    border: 1px solid #6b5876;
+    padding: 1rem;
+    border-radius: 4px;
+    background: rgba(107, 88, 118, 0.12);
+}
+
+.turnstile-widget {
+    display: inline-flex;
+    justify-content: center;
+    margin-top: 0.75rem;
+}
+
+.captcha-error {
+    color: #f3a5a5;
+    margin-top: 0.75rem;
+    line-height: 1.5;
+}
+
 .contact-links p {
     margin: 0.75rem 0;
     line-height: 1.8;

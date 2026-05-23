@@ -8,7 +8,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build": "react-scripts build",
-    "build-linux": "react-scripts build && mv build/* ./ && rm -rf build"
+    "build-linux": "react-scripts build && mv build/* ./ && rm -rf build",
+    "optimize:images": "node scripts/optimize-images.js",
+    "generate:thumbnails": "node scripts/generate-thumbnails.js"
   },
   "keywords": [
     "art",

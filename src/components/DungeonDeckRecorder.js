@@ -1,5 +1,8 @@
 import React from 'react';
 
+const DMR_DEPLOY_URL = 'https://dungeon-deck-recorder.vercel.app';
+const DMR_GITHUB_URL = 'https://github.com/sinogen0-0/DMR';
+
 const DungeonDeckRecorder = ({ onBack }) => {
     return (
         <div style={{ padding: '20px' }}>
@@ -24,13 +27,15 @@ const DungeonDeckRecorder = ({ onBack }) => {
                 }}>
                     <button 
                         className="artist-info-button"
-                        onClick={() => window.open('http://localhost:5173', '_blank', 'noopener,noreferrer')}
+                        onClick={() => window.open(DMR_DEPLOY_URL, '_blank', 'noopener,noreferrer')}
                         style={{ margin: '0.5rem' }}
                     >
-                        Open Local App (Dev)
+                        Open Live App
                     </button>
                     <a 
-                        href="file:///C:/Users/Sinogen/Desktop/DMR"
+                        href={DMR_GITHUB_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="artist-info-button"
                         style={{ 
                             display: 'inline-block',
@@ -38,7 +43,7 @@ const DungeonDeckRecorder = ({ onBack }) => {
                             textDecoration: 'none'
                         }}
                     >
-                        Open Project Folder
+                        View GitHub Repository
                     </a>
                 </div>
                 <p style={{ 
@@ -47,8 +52,7 @@ const DungeonDeckRecorder = ({ onBack }) => {
                     marginTop: '2rem',
                     fontStyle: 'italic'
                 }}>
-                    Note: The Dungeon Deck Recorder is a separate Svelte application. 
-                    Run 'npm run dev' in the DMR directory to start the local development server.
+                    Note: The Dungeon Deck Recorder is a separate Svelte application with web deployment and source code maintained independently.
                 </p>
             </div>
         </div>

@@ -9,6 +9,7 @@ import img7 from '../images/ceramics/IMG_3436.jpg';
 import img8 from '../images/ceramics/IMG_3437.jpg';
 import img9 from '../images/ceramics/IMG_3440.jpg';
 import img10 from '../images/ceramics/IMG_3669.jpg';
+import { ceramicPreviews } from './previews';
 
 const ceramicArt = [
     {
@@ -93,7 +94,23 @@ const ceramicArt = [
     }
 ];
 
-export default ceramicArt;
+const ceramicPreviewById = {
+    1: ceramicPreviews.img10,
+    2: ceramicPreviews.img9,
+    3: ceramicPreviews.img8,
+    4: ceramicPreviews.img7,
+    5: ceramicPreviews.img6,
+    6: ceramicPreviews.img5,
+    7: ceramicPreviews.img4,
+    8: ceramicPreviews.img3,
+    9: ceramicPreviews.img2,
+    10: ceramicPreviews.img1
+};
+
+export default ceramicArt.map((item) => ({
+    ...item,
+    previewUrl: ceramicPreviewById[item.id] || item.previewUrl
+}));
 
 /* 
 TO ADD YOUR OWN IMAGES:

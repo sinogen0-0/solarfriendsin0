@@ -3,6 +3,7 @@ import badboy from '../images/music/badboy.PNG';
 import goodboy from '../images/music/good_boy.PNG';
 import finalVoyage from '../images/music/TheFinalVoyageOfTheLastKing.PNG';
 import lastHuman from '../images/music/TheLastHumanWillBeAKingInSpace.PNG';
+import { musicPreviews } from './previews';
 
 const music = [
     {
@@ -39,7 +40,17 @@ const music = [
     }
 ];
 
-export default music;
+const musicPreviewById = {
+    1: musicPreviews.goodboy,
+    2: musicPreviews.badboy,
+    3: musicPreviews.lastHuman,
+    4: musicPreviews.finalVoyage
+};
+
+export default music.map((item) => ({
+    ...item,
+    previewUrl: musicPreviewById[item.id] || item.previewUrl
+}));
 
 /* 
 TO ADD YOUR OWN ALBUM ART:

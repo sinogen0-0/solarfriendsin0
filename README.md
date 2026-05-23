@@ -24,6 +24,34 @@ The site will open at [http://localhost:3000](http://localhost:3000)
 npm run build
 ```
 
+### Optimize Images
+
+```bash
+npm run optimize:images
+```
+
+This compresses `.jpg`, `.jpeg`, and `.png` files in `src/images/` in-place using `sharp`.
+
+### Generate Gallery Thumbnails
+
+```bash
+npm run generate:thumbnails
+```
+
+This creates lightweight `.webp` previews in `src/images/previews/` for grid cards.
+Grid views use `previewUrl` thumbnails and modal views use full-resolution `imageUrl` media.
+
+### Optional: Configure Captcha for Contact Reveal
+
+Set your Cloudflare Turnstile site key before running:
+
+```bash
+# .env.local
+REACT_APP_TURNSTILE_SITE_KEY=your_turnstile_site_key
+```
+
+Without this key, contact details stay protected and a configuration warning is shown in the About modal.
+
 ## Adding Your Content
 
 ### Adding Images
@@ -92,12 +120,21 @@ solarfriend-enchantments/
 ## Features
 
 - **4-Card Navigation**: Expandable card stack interface
+- **Route Deep Links**: Direct section URLs that persist on refresh
 - **Dark Mode**: Inverted color scheme with high contrast
 - **Monospace Font**: Cascadia Code for a unique aesthetic
 - **Image Galleries**: Lightbox view with descriptions
 - **Bandcamp Integration**: Direct links to your music
 - **Responsive Design**: Works on desktop, tablet, and mobile
 - **Lazy Loading**: Optimized image loading for performance
+
+## Section URLs
+
+- `/`
+- `/ceramic-art`
+- `/digital-physical-art`
+- `/music`
+- `/dungeon-deck-recorder`
 
 ## Technologies
 

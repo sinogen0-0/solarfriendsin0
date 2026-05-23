@@ -44,6 +44,7 @@ import colorShapeFluid from '../images/digital_art/_color_shape_fluid.avi';
 
 // Physical Art
 import physicalArt1 from '../images/physical_art/000.jpg';
+import { digitalArtPreviews, physicalArtPreviews } from './previews';
 
 const digitalPhysicalArt = [
     // Sorted by creation date - newest first
@@ -403,4 +404,33 @@ const digitalPhysicalArt = [
     }
 ];
 
-export default digitalPhysicalArt;
+const digitalPhysicalPreviewById = {
+    1: digitalArtPreviews.theHighPriestess,
+    2: digitalArtPreviews.theEmpress,
+    4: digitalArtPreviews.mwxPoster,
+    5: digitalArtPreviews.header,
+    6: digitalArtPreviews.albumCover,
+    8: digitalArtPreviews.quickie,
+    11: digitalArtPreviews.caged,
+    12: digitalArtPreviews.moonBoom,
+    15: digitalArtPreviews.flame,
+    17: digitalArtPreviews.photoAug2,
+    18: digitalArtPreviews.photoAug1,
+    19: digitalArtPreviews.scallopsFront,
+    20: digitalArtPreviews.face,
+    21: digitalArtPreviews.trump,
+    22: digitalArtPreviews.room2,
+    23: digitalArtPreviews.finalish,
+    24: digitalArtPreviews.alternate,
+    25: digitalArtPreviews.digitalForm,
+    26: digitalArtPreviews.ticket3,
+    31: digitalArtPreviews.untitled,
+    36: digitalArtPreviews.poster,
+    39: digitalArtPreviews.manWings,
+    40: physicalArtPreviews.physicalArt1
+};
+
+export default digitalPhysicalArt.map((item) => ({
+    ...item,
+    previewUrl: digitalPhysicalPreviewById[item.id] || item.previewUrl
+}));
