@@ -233,31 +233,19 @@ function App() {
 function CardStack({ onViewChange }) {
   const [expanded, setExpanded] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [introStarted, setIntroStarted] = useState(false);
 
-  useEffect(() => {
-    if (introStarted) {
-      return undefined;
+  const handleClick = () => {
+    if (expanded) {
+      return;
     }
 
-    setIntroStarted(true);
-    let endTransitionTimer;
-    const startTransitionTimer = setTimeout(() => {
-      setIsTransitioning(true);
-      setExpanded(true);
+    setIsTransitioning(true);
+    setExpanded(true);
 
-      endTransitionTimer = setTimeout(() => {
-        setIsTransitioning(false);
-      }, 300);
-    }, 380);
-
-    return () => {
-      clearTimeout(startTransitionTimer);
-      if (endTransitionTimer) {
-        clearTimeout(endTransitionTimer);
-      }
-    };
-  }, [introStarted]);
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 300);
+  };
 
   const handleCardClick = (view, event) => {
     if (!expanded || isTransitioning) {
@@ -269,7 +257,7 @@ function CardStack({ onViewChange }) {
   };
 
   return (
-    <div className={`card-stack ${expanded ? 'expanded' : ''} ${isTransitioning ? 'transitioning' : ''}`}>
+    <div className={`card-stack ${expanded ? 'expanded' : ''} ${isTransitioning ? 'transitioning' : ''}`} onClick={handleClick}>
       <div className="card card-1" onClick={(event) => handleCardClick('ceramic-art', event)}>{expanded ? 'Ceramic Art' : 'Enchantments'}</div>
       <div className="card card-2" onClick={(event) => handleCardClick('digital-physical-art', event)}>{expanded ? 'Digital & Physical Art' : ''}</div>
       <div className="card card-3" onClick={(event) => handleCardClick('music', event)}>{expanded ? 'Music' : ''}</div>
