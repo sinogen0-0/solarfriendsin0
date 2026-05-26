@@ -76,13 +76,6 @@ const BaseGrid = ({ data, onBack }) => {
                                     <img src={selectedImage.imageUrl} alt={selectedImage.title} />
                                 )}
                             </div>
-                            <div className="enlarged-description-container">
-                                <h3>{selectedImage.title}</h3>
-                                <p>{selectedImage.description}</p>
-                                {selectedImage.medium && <p><strong>Medium:</strong> {selectedImage.medium}</p>}
-                                {selectedImage.dimensions && <p><strong>Dimensions:</strong> {selectedImage.dimensions}</p>}
-                                {selectedImage.year && <p><strong>Year:</strong> {selectedImage.year}</p>}
-                            </div>
                         </div>
                     </div>
                 )}

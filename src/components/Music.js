@@ -51,9 +51,6 @@ const Music = ({ onBack }) => {
                                 <img src={selectedAlbum.imageUrl} alt={selectedAlbum.title} />
                             </div>
                             <div className="enlarged-description-container">
-                                <h3>{selectedAlbum.title}</h3>
-                                <p>{selectedAlbum.description}</p>
-                                {selectedAlbum.year && <p><strong>Year:</strong> {selectedAlbum.year}</p>}
                                 {selectedAlbum.bandcampUrl && (
                                     <button 
                                         className="artist-info-button" 
