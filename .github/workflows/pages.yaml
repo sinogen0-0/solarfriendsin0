@@ -1,41 +1,58 @@
-name: Build Pages Site
+name: Deploy Portfolio to GitHub Pages
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
   id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
-
-      - name: Check out gh-pages branch
-        run: git checkout -b gh-pages
+        run: npm ci
 
       - name: Build site
-        run: npm run build-linux
+        run: npm run build
 
-      - name: Push to gh-pages branch
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config --global user.name "Jacob Pierce"
-          git config --global user.email "jwpierce14@gmail.com"
-          git add .
-          git commit -m "Push to pages branch"
-          git push --force --set-upstream origin gh-pages
+      - name: Preserve custom domain
+        run: Copy-Item CNAME build/CNAME
+        shell: pwsh
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
