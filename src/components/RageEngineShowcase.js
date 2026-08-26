@@ -1,0 +1,16 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const engineModules = [
+  ['Asset pipeline', 'Manifest contracts, generated typed C catalogs, lazy runtime loading, and hot reload.'],
+  ['Runtime architecture', 'A flat GameContext coordinator with focused input, audio, terrain, hero, and camera modules.'],
+  ['Build + DX', 'CMake/Ninja builds, PowerShell and Bash launchers, timing dashboards, and compiler-log translation.'],
+  ['Agentic content', 'Blender automation with validation, feedback, and self-healing passes before assets reach the engine.']
+];
+
+export default function RageEngineShowcase({ mode }) {
+  if (mode === 'recorder') {
+    return <section className="case-study section-wrap"><p className="eyebrow">PRODUCT ENGINEERING / SVELTE + CAPACITOR</p><h1>Dungeon Deck Recorder</h1><p className="case-lede">An offline-first tabletop session tool for recording, transcribing, extracting, and browsing campaign knowledge.</p><div className="case-actions"><a className="button button-primary" href="https://dungeon-deck-recorder.vercel.app" target="_blank" rel="noreferrer">Open live app ↗</a><a className="button button-quiet" href="https://github.com/sinogen0-0/DMR" target="_blank" rel="noreferrer">View source ↗</a></div><Link className="text-link" to="/">Back to selected work</Link></section>;
+  }
+  return <section className="case-study section-wrap"><p className="eyebrow">GRAPHICS / TOOLS / PERSONAL PROJECT / 2026</p><h1>R.A.G.E. Engine</h1><p className="case-lede">A custom C and raylib engine built as a working laboratory for rendering, authoring tools, reproducible builds, and production-minded agentic workflows.</p><div className="case-actions"><a className="button button-primary" href="https://github.com/sinogen0-0/ResponsibleAdults" target="_blank" rel="noreferrer">View engine source ↗</a><a className="button button-quiet" href="https://github.com/sinogen0-0/solarfriendsin0" target="_blank" rel="noreferrer">Portfolio repository ↗</a></div><div className="architecture-board" aria-label="RAGE engine architecture overview"><div className="architecture-core">GAME<br />CONTEXT</div><div className="architecture-node node-input">INPUT</div><div className="architecture-node node-assets">ASSET<br />CATALOG</div><div className="architecture-node node-render">RAYLIB<br />RENDER</div><div className="architecture-node node-tools">TOOLS<br />+ AI</div></div><div className="module-grid">{engineModules.map(([title, description]) => <article key={title}><p className="eyebrow">MODULE</p><h2>{title}</h2><p>{description}</p></article>)}</div><div className="case-proof"><p className="eyebrow">WHY IT MATTERS</p><p>The engine is deliberately public-facing as source and documentation: it shows how I think about boundaries, content contracts, iteration speed, portability, and failure recovery. The native demo remains a downloadable/source project rather than a fake browser embed.</p></div><Link className="text-link" to="/">Back to selected work</Link></section>;
+}
