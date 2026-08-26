@@ -5,8 +5,6 @@ import DigitalPhysicalArtGrid from './components/DigitalPhysicalArtGrid';
 import Music from './components/Music';
 import RageEngineShowcase from './components/RageEngineShowcase';
 import './styles/Portfolio.css';
-import moonBoom from './images/digital_art/moon_boom.png';
-import ceramicPiece from './images/ceramics/IMG_3436.jpg';
 
 const projects = [
   {
@@ -14,27 +12,34 @@ const projects = [
     label: 'Graphics / Tools / AI workflows',
     description: 'A custom C and raylib engine with generated asset catalogs, hot reload, cross-platform build tooling, and a documented agentic content pipeline.',
     href: '/rage-engine',
-    image: moonBoom
+    tone: 'magenta'
   },
   {
     title: 'WWE 2K',
     label: 'AAA UI systems / C++',
     description: 'Five consecutive annual console releases, including cross-platform character customization, Common UI systems, defect triage, and designer-facing tooling.',
     href: '#experience',
-    image: ceramicPiece
+    tone: 'magenta'
   },
   {
     title: 'Dungeon Deck Recorder',
     label: 'Product engineering / Svelte',
     description: 'An offline-first tabletop session tool that brings recording, transcription, entity extraction, and searchable dossiers into one focused workflow.',
     href: '/dungeon-deck-recorder',
-    image: moonBoom
+    tone: 'magenta'
   }
 ];
 
 function Shell({ children }) {
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const [darkMode, setDarkMode] = React.useState(() => localStorage.getItem('solar-friend-theme') === 'dark');
+
+  React.useEffect(() => {
+    document.documentElement.dataset.theme = darkMode ? 'dark' : 'light';
+    localStorage.setItem('solar-friend-theme', darkMode ? 'dark' : 'light');
+  }, [darkMode]);
+
   return (
     <div className="portfolio-shell">
       <header className="site-header">
@@ -46,7 +51,7 @@ function Shell({ children }) {
           <Link to="/music">Sound</Link>
           <Link to="/about">About</Link>
         </nav>
-        <a className="header-contact" href="mailto:jwpierce14@gmail.com">Contact</a>
+        <div className="header-tools"><button className="theme-toggle" type="button" onClick={() => setDarkMode((current) => !current)} aria-pressed={darkMode}>{darkMode ? 'Light mode' : 'Dark mode'}</button><a className="header-contact" href="mailto:jwpierce14@gmail.com">Contact</a></div>
       </header>
       <main>{children}</main>
       <footer className="site-footer">
@@ -70,7 +75,7 @@ function Home() {
             <a className="button button-quiet" href="mailto:jwpierce14@gmail.com">Start a conversation</a>
           </div>
         </div>
-        <div className="hero-art" aria-label="A cosmic digital artwork from Solar Friend Sin0" role="img" style={{ backgroundImage: `url(${moonBoom})` }}>
+        <div className="hero-art preview-square" aria-label="Abstract magenta portfolio preview" role="img">
           <span className="hero-stamp">FIELD NOTE 01<br />OBJECT / IMAGE / TOOL</span>
         </div>
       </section>
@@ -87,7 +92,7 @@ function Home() {
         <div className="project-grid">
           {projects.map((project, index) => (
             <article className={`project-card project-card-${index + 1}`} key={project.title}>
-              <Link to={project.href} className="project-image" style={{ backgroundImage: `url(${project.image})` }} aria-label={`Open ${project.title}`} />
+              <Link to={project.href} className={`project-image preview-square ${project.tone}`} aria-label={`Open ${project.title}`} />
               <div className="project-body"><p className="eyebrow">{project.label}</p><h3>{project.title}</h3><p>{project.description}</p><Link className="text-link" to={project.href}>Read the case study <span aria-hidden="true">↗</span></Link></div>
             </article>
           ))}
