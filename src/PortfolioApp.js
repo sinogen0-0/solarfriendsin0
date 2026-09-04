@@ -4,6 +4,8 @@ import CeramicArtGrid from './components/CeramicArtGrid';
 import DigitalPhysicalArtGrid from './components/DigitalPhysicalArtGrid';
 import Music from './components/Music';
 import RageEngineShowcase from './components/RageEngineShowcase';
+import SignalPortrait from './components/SignalPortrait';
+import SignalPortraitWall from './components/SignalPortraitWall';
 import './styles/Portfolio.css';
 
 const projects = [
@@ -34,6 +36,7 @@ function Shell({ children }) {
   const location = useLocation();
   const isHome = location.pathname === '/';
   const [darkMode, setDarkMode] = React.useState(() => localStorage.getItem('solar-friend-theme') === 'dark');
+  const [portraitOpen, setPortraitOpen] = React.useState(false);
 
   React.useEffect(() => {
     document.documentElement.dataset.theme = darkMode ? 'dark' : 'light';
@@ -41,7 +44,7 @@ function Shell({ children }) {
   }, [darkMode]);
 
   return (
-    <div className="portfolio-shell">
+    <div className="portfolio-shell" data-portrait-open={portraitOpen}>
       <header className="site-header">
         <Link className="wordmark" to="/">SOLAR FRIEND <span>SIN0</span></Link>
         <nav aria-label="Primary navigation">
@@ -50,10 +53,18 @@ function Shell({ children }) {
           <Link to="/digital-physical-art">Image + Motion</Link>
           <Link to="/music">Sound</Link>
           <Link to="/about">About</Link>
+          <Link to="/signal-portrait">Signal wall</Link>
         </nav>
-        <div className="header-tools"><button className="theme-toggle" type="button" onClick={() => setDarkMode((current) => !current)} aria-pressed={darkMode}>{darkMode ? 'Light mode' : 'Dark mode'}</button><a className="header-contact" href="mailto:jwpierce14@gmail.com">Contact</a></div>
+        <div className="header-tools">
+          <button type="button" className="signal-portrait-toggle" onClick={() => setPortraitOpen((current) => !current)}>
+            {portraitOpen ? 'Close portrait' : 'Signal portrait'}
+          </button>
+          <button className="theme-toggle" type="button" onClick={() => setDarkMode((current) => !current)} aria-pressed={darkMode}>{darkMode ? 'Light mode' : 'Dark mode'}</button>
+          <a className="header-contact" href="mailto:jwpierce14@gmail.com">Contact</a>
+        </div>
       </header>
-      <main>{children}</main>
+      <main className="page-content">{children}</main>
+      <SignalPortrait open={portraitOpen} onClose={() => setPortraitOpen((current) => !current)} />
       <footer className="site-footer">
         <span>JACOB PIERCE / SOLAR FRIEND SIN0</span>
         <span>ENGINEERING, ART, AND SYSTEMS THINKING</span>
@@ -72,6 +83,7 @@ function Home() {
           <p className="hero-lede">I build dependable software, expressive tools, and physical objects. My work lives where engineering precision meets handmade irregularity.</p>
           <div className="hero-actions">
             <a className="button button-primary" href="#selected-work">View selected work</a>
+            <Link className="button button-quiet" to="/signal-portrait">Signal wall</Link>
             <a className="button button-quiet" href="mailto:jwpierce14@gmail.com">Start a conversation</a>
           </div>
         </div>
@@ -113,5 +125,5 @@ function About() {
 }
 
 export default function PortfolioApp() {
-  return <Shell><Routes><Route path="/" element={<Home />} /><Route path="/about" element={<About />} /><Route path="/ceramic-art" element={<CeramicArtGrid onBack={() => {}} />} /><Route path="/digital-physical-art" element={<DigitalPhysicalArtGrid onBack={() => {}} />} /><Route path="/music" element={<Music onBack={() => {}} />} /><Route path="/dungeon-deck-recorder" element={<RageEngineShowcase mode="recorder" />} /><Route path="/rage-engine" element={<RageEngineShowcase />} /></Routes></Shell>;
+  return <Shell><Routes><Route path="/" element={<Home />} /><Route path="/about" element={<About />} /><Route path="/signal-portrait" element={<SignalPortraitWall />} /><Route path="/ceramic-art" element={<CeramicArtGrid onBack={() => {}} />} /><Route path="/digital-physical-art" element={<DigitalPhysicalArtGrid onBack={() => {}} />} /><Route path="/music" element={<Music onBack={() => {}} />} /><Route path="/dungeon-deck-recorder" element={<RageEngineShowcase mode="recorder" />} /><Route path="/rage-engine" element={<RageEngineShowcase />} /></Routes></Shell>;
 }
