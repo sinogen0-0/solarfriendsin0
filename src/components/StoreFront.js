@@ -150,9 +150,6 @@ export default function StoreFront() {
           <p className="eyebrow">CERAMICS STORE</p>
           <h1>Hand-thrown work from the kiln.</h1>
         </div>
-        <div className="store-actions">
-          <a className="button button-quiet" href="mailto:jwpierce14@gmail.com">Contact the studio</a>
-        </div>
       </div>
 
       <div className="store-layout">

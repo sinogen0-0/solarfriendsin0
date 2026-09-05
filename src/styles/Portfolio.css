@@ -51,9 +51,9 @@ body { transition: background .2s ease, color .2s ease; }
   .page-content, .signal-portrait-panel { transition: none; }
 }
 
-.store-page { max-width: 1600px; padding-top: 4rem; }
-.store-intro { align-items: end; display: flex; gap: 2rem; justify-content: space-between; margin-bottom: 3rem; }
-.store-intro h1 { margin-bottom: 0; }
+.store-page { max-width: 1600px; padding-top: 3.5rem; }
+.store-intro { margin-bottom: 2rem; }
+.store-intro h1 { font-size: clamp(3.5rem, 6.5vw, 7rem); letter-spacing: -.06em; line-height: .88; margin-bottom: 0; max-width: none; }
 .store-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1rem; }
 .store-layout { display: grid; gap: 3rem 1.5rem; grid-template-columns: repeat(12, minmax(0, 1fr)); }
 .store-layout > .store-product-grid { grid-column: 1 / -1; }
