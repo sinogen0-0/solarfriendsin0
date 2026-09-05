@@ -1,8 +1,16 @@
 import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { storeCatalog } from '../data/storeProducts';
+import ceramicArt from '../data/ceramicArt';
 
 const products = storeCatalog;
+
+const soldItems = ceramicArt.map((item) => ({
+  id: `ceramic-${item.id}`,
+  name: item.title,
+  description: item.description,
+  images: item.images && item.images.length ? item.images.map((entry) => entry.imageUrl) : [item.imageUrl],
+  sold: true
+}));
 
 const shippingOptions = [
   { id: 'pickup', label: 'Local pickup', price: 0 },
@@ -139,11 +147,10 @@ export default function StoreFront() {
     <section className="section-wrap store-page">
       <div className="store-intro">
         <div>
-          <p className="eyebrow">STUDIO STORE</p>
+          <p className="eyebrow">CERAMICS STORE</p>
           <h1>Hand-thrown work from the kiln.</h1>
         </div>
         <div className="store-actions">
-          <Link className="button button-primary" to="/ceramic-art">Browse the gallery</Link>
           <a className="button button-quiet" href="mailto:jwpierce14@gmail.com">Contact the studio</a>
         </div>
       </div>
@@ -186,6 +193,29 @@ export default function StoreFront() {
             );
           })}
         </div>
+
+        {soldItems.length ? (
+          <div className="store-sold-section">
+            <p className="eyebrow">FROM THE ARCHIVE</p>
+            <h2>Older pieces, already found a home.</h2>
+            <div className="store-product-grid store-sold-grid">
+              {soldItems.map((item) => (
+                <article className="store-product-card is-sold" key={item.id}>
+                  <div className="sold-image-wrap">
+                    <img src={item.images[0]} alt={item.name} loading="lazy" />
+                    <span className="sold-badge">Sold</span>
+                  </div>
+                  <div className="store-product-copy">
+                    <div className="product-row">
+                      <h3>{item.name}</h3>
+                    </div>
+                    <p>{item.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        ) : null}
 
         <aside className="cart-panel">
           <h2>Cart</h2>
