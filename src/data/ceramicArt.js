@@ -64,23 +64,19 @@ const ceramicArt = [
         id: 7,
         title: "Ceramic Piece 4",
         imageUrl: img4,
-        description: "Expertly crafted ceramic sculpture.",
+        description: "Expertly crafted ceramic sculpture, shown from two angles.",
         medium: "Ceramic, glaze",
-        year: "2024"
+        year: "2024",
+        images: [
+            { imageUrl: img4, previewUrl: ceramicPreviews.img4 },
+            { imageUrl: img2, previewUrl: ceramicPreviews.img2 }
+        ]
     },
     {
         id: 8,
         title: "Ceramic Piece 3",
         imageUrl: img3,
         description: "Artisan ceramic work featuring organic forms.",
-        medium: "Ceramic, glaze",
-        year: "2024"
-    },
-    {
-        id: 9,
-        title: "Ceramic Piece 2",
-        imageUrl: img2,
-        description: "Handcrafted ceramic piece with intricate detail.",
         medium: "Ceramic, glaze",
         year: "2024"
     },
@@ -103,7 +99,6 @@ const ceramicPreviewById = {
     6: ceramicPreviews.img5,
     7: ceramicPreviews.img4,
     8: ceramicPreviews.img3,
-    9: ceramicPreviews.img2,
     10: ceramicPreviews.img1
 };
 

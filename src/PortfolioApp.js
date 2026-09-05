@@ -6,6 +6,7 @@ import Music from './components/Music';
 import RageEngineShowcase from './components/RageEngineShowcase';
 import SignalPortrait from './components/SignalPortrait';
 import SignalPortraitWall from './components/SignalPortraitWall';
+import StoreFront from './components/StoreFront';
 import './styles/Portfolio.css';
 
 const projects = [
@@ -35,13 +36,11 @@ const projects = [
 function Shell({ children }) {
   const location = useLocation();
   const isHome = location.pathname === '/';
-  const [darkMode, setDarkMode] = React.useState(() => localStorage.getItem('solar-friend-theme') === 'dark');
   const [portraitOpen, setPortraitOpen] = React.useState(false);
 
   React.useEffect(() => {
-    document.documentElement.dataset.theme = darkMode ? 'dark' : 'light';
-    localStorage.setItem('solar-friend-theme', darkMode ? 'dark' : 'light');
-  }, [darkMode]);
+    document.documentElement.dataset.theme = 'dark';
+  }, []);
 
   return (
     <div className="portfolio-shell" data-portrait-open={portraitOpen}>
@@ -52,6 +51,7 @@ function Shell({ children }) {
           <Link to="/ceramic-art">Ceramics</Link>
           <Link to="/digital-physical-art">Image + Motion</Link>
           <Link to="/music">Sound</Link>
+          <Link to="/store">Store</Link>
           <Link to="/about">About</Link>
           <Link to="/signal-portrait">Signal wall</Link>
         </nav>
@@ -59,7 +59,6 @@ function Shell({ children }) {
           <button type="button" className="signal-portrait-toggle" onClick={() => setPortraitOpen((current) => !current)}>
             {portraitOpen ? 'Close portrait' : 'Signal portrait'}
           </button>
-          <button className="theme-toggle" type="button" onClick={() => setDarkMode((current) => !current)} aria-pressed={darkMode}>{darkMode ? 'Light mode' : 'Dark mode'}</button>
           <a className="header-contact" href="mailto:jwpierce14@gmail.com">Contact</a>
         </div>
       </header>
@@ -83,6 +82,7 @@ function Home() {
           <p className="hero-lede">I build dependable software, expressive tools, and physical objects. My work lives where engineering precision meets handmade irregularity.</p>
           <div className="hero-actions">
             <a className="button button-primary" href="#selected-work">View selected work</a>
+            <Link className="button button-quiet" to="/store">Shop the kiln</Link>
             <Link className="button button-quiet" to="/signal-portrait">Signal wall</Link>
             <a className="button button-quiet" href="mailto:jwpierce14@gmail.com">Start a conversation</a>
           </div>
@@ -115,7 +115,7 @@ function Home() {
         <div className="section-wrap experience-grid"><div><p className="eyebrow">THE THROUGH-LINE</p><h2>Make the complicated usable.</h2></div><div><p>I have worked across player-facing UI, live-service systems, networked features, build pipelines, and creative tooling. The job changes; the instinct stays the same: clarify the system, make iteration cheap, and ship something people can feel.</p><Link className="text-link" to="/about">More about my practice <span aria-hidden="true">↗</span></Link></div></div>
       </section>
 
-      <section className="section-wrap practice-section"><div className="section-heading"><p className="eyebrow">PRACTICE MAP</p><h2>Four materials, one studio.</h2></div><div className="practice-grid"><Link to="/ceramic-art"><strong>01</strong><span>Ceramics</span><small>Form, surface, object</small></Link><Link to="/digital-physical-art"><strong>02</strong><span>Image</span><small>Symbol, color, motion</small></Link><Link to="/rage-engine"><strong>03</strong><span>Code</span><small>Tools, engines, pipelines</small></Link><Link to="/music"><strong>04</strong><span>Sound</span><small>Atmosphere, rhythm, story</small></Link></div></section>
+      <section className="section-wrap practice-section"><div className="section-heading"><p className="eyebrow">PRACTICE MAP</p><h2>Four materials, one studio.</h2></div><div className="practice-grid"><Link to="/ceramic-art"><strong>01</strong><span>Ceramics</span><small>Form, surface, object</small></Link><Link to="/digital-physical-art"><strong>02</strong><span>Image</span><small>Symbol, color, motion</small></Link><Link to="/rage-engine"><strong>03</strong><span>Code</span><small>Tools, engines, pipelines</small></Link><Link to="/store"><strong>04</strong><span>Store</span><small>Clay, release, ritual</small></Link></div></section>
     </>
   );
 }
@@ -125,5 +125,5 @@ function About() {
 }
 
 export default function PortfolioApp() {
-  return <Shell><Routes><Route path="/" element={<Home />} /><Route path="/about" element={<About />} /><Route path="/signal-portrait" element={<SignalPortraitWall />} /><Route path="/ceramic-art" element={<CeramicArtGrid onBack={() => {}} />} /><Route path="/digital-physical-art" element={<DigitalPhysicalArtGrid onBack={() => {}} />} /><Route path="/music" element={<Music onBack={() => {}} />} /><Route path="/dungeon-deck-recorder" element={<RageEngineShowcase mode="recorder" />} /><Route path="/rage-engine" element={<RageEngineShowcase />} /></Routes></Shell>;
+  return <Shell><Routes><Route path="/" element={<Home />} /><Route path="/about" element={<About />} /><Route path="/signal-portrait" element={<SignalPortraitWall />} /><Route path="/ceramic-art" element={<CeramicArtGrid onBack={() => {}} />} /><Route path="/digital-physical-art" element={<DigitalPhysicalArtGrid onBack={() => {}} />} /><Route path="/music" element={<Music onBack={() => {}} />} /><Route path="/store" element={<StoreFront />} /><Route path="/dungeon-deck-recorder" element={<RageEngineShowcase mode="recorder" />} /><Route path="/rage-engine" element={<RageEngineShowcase />} /></Routes></Shell>;
 }
