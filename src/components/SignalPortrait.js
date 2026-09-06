@@ -22,16 +22,13 @@ function formatValue(value) {
   return String(value).slice(0, 160);
 }
 
-export default function SignalPortrait({ open = false, onClose }) {
+export default function SignalPortrait() {
   const { settings, toggleGroup } = useSignalConsent();
   const [snapshot, setSnapshot] = React.useState({});
   const [submitted, setSubmitted] = React.useState(false);
+  const [withdrawn, setWithdrawn] = React.useState(false);
 
   React.useEffect(() => {
-    if (!open) {
-      return undefined;
-    }
-
     const nextSnapshot = {};
 
     orderedGroups.forEach((group) => {
@@ -41,8 +38,7 @@ export default function SignalPortrait({ open = false, onClose }) {
     });
 
     setSnapshot(nextSnapshot);
-    return undefined;
-  }, [open, settings]);
+  }, [settings]);
 
   const handleSubmit = async () => {
     const adapter = createArchiveAdapter();
@@ -58,26 +54,38 @@ export default function SignalPortrait({ open = false, onClose }) {
       await adapter.submit(record);
       localStorage.setItem('solar-friend-signal-deletion-token', deletionToken);
       setSubmitted(true);
+      setWithdrawn(false);
     } catch (error) {
       setSubmitted(false);
     }
   };
 
+  const handleWithdraw = async () => {
+    const token = localStorage.getItem('solar-friend-signal-deletion-token');
+
+    if (token) {
+      const adapter = createArchiveAdapter();
+      try {
+        await adapter.deleteByToken(token);
+      } catch (error) {
+        // Best-effort deletion; still clear the local reference below.
+      }
+    }
+
+    localStorage.removeItem('solar-friend-signal-deletion-token');
+    setSubmitted(false);
+    setWithdrawn(true);
+  };
+
   return (
-    <aside className={`signal-portrait-panel ${open ? 'is-open' : 'is-collapsed'}`} aria-live="polite">
-      {!open ? (
-        <button type="button" className="signal-portrait-tab" onClick={onClose} aria-label="Open signal portrait panel">
-          Signal Portrait
-        </button>
-      ) : (
-        <div className="signal-portrait-surface">
-          <div className="signal-portrait-header">
-            <div>
-              <p className="eyebrow">CONSENTED READ</p>
-              <h3>Signal Portrait</h3>
-            </div>
-            <button type="button" className="signal-close" onClick={onClose}>Close</button>
+    <aside className="signal-portrait-panel" aria-live="polite">
+      <div className="signal-portrait-surface">
+        <div className="signal-portrait-header">
+          <div>
+            <p className="eyebrow">CONSENTED READ</p>
+            <h3>Signal Portrait</h3>
           </div>
+        </div>
 
           <div className="signal-portrait-intro">
             <p>What the browser reveals without a prompt is shown first. Deeper fingerprinting stays off until you switch it on.</p>
@@ -157,14 +165,14 @@ export default function SignalPortrait({ open = false, onClose }) {
             <button type="button" className="button button-primary" onClick={handleSubmit}>
               Submit portrait
             </button>
-            <button type="button" className="button button-quiet" onClick={() => localStorage.removeItem('solar-friend-signal-deletion-token')}>
+            <button type="button" className="button button-quiet" onClick={handleWithdraw}>
               Withdraw
             </button>
           </div>
 
           {submitted ? <p className="signal-success">Stored with your consent and a deletion token.</p> : null}
-        </div>
-      )}
+          {withdrawn ? <p className="signal-success">Withdrawn. Your archived portrait was deleted.</p> : null}
+      </div>
     </aside>
   );
 }

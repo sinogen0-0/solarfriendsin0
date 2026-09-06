@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link, Route, Routes, useLocation } from 'react-router-dom';
-import CeramicArtGrid from './components/CeramicArtGrid';
+import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import DigitalPhysicalArtGrid from './components/DigitalPhysicalArtGrid';
 import Music from './components/Music';
 import RageEngineShowcase from './components/RageEngineShowcase';
 import SignalPortrait from './components/SignalPortrait';
 import SignalPortraitWall from './components/SignalPortraitWall';
 import StoreFront from './components/StoreFront';
+import { digitalArtPreviews } from './data/previews';
 import './styles/Portfolio.css';
 
 const projects = [
@@ -15,55 +15,53 @@ const projects = [
     label: 'Graphics / Tools / AI workflows',
     description: 'A custom C and raylib engine with generated asset catalogs, hot reload, cross-platform build tooling, and a documented agentic content pipeline.',
     href: '/rage-engine',
-    tone: 'magenta'
+    tone: 'magenta',
+    image: digitalArtPreviews.digitalForm
   },
   {
     title: 'WWE 2K',
     label: 'AAA UI systems / C++',
     description: 'Five consecutive annual console releases, including cross-platform character customization, Common UI systems, defect triage, and designer-facing tooling.',
     href: '#experience',
-    tone: 'magenta'
+    tone: 'magenta',
+    image: digitalArtPreviews.face
   },
   {
     title: 'Dungeon Deck Recorder',
     label: 'Product engineering / Svelte',
     description: 'An offline-first tabletop session tool that brings recording, transcription, entity extraction, and searchable dossiers into one focused workflow.',
     href: '/dungeon-deck-recorder',
-    tone: 'magenta'
+    tone: 'magenta',
+    image: digitalArtPreviews.ticket3
   }
 ];
 
 function Shell({ children }) {
   const location = useLocation();
   const isHome = location.pathname === '/';
-  const [portraitOpen, setPortraitOpen] = React.useState(false);
 
   React.useEffect(() => {
     document.documentElement.dataset.theme = 'dark';
   }, []);
 
   return (
-    <div className="portfolio-shell" data-portrait-open={portraitOpen}>
+    <div className="portfolio-shell" data-portrait-open="true">
       <header className="site-header">
         <Link className="wordmark" to="/">SOLAR FRIEND <span>SIN0</span></Link>
         <nav aria-label="Primary navigation">
           <Link className={isHome ? 'active' : ''} to="/">Work</Link>
-          <Link to="/ceramic-art">Ceramics</Link>
+          <Link to="/store">Ceramics Store</Link>
           <Link to="/digital-physical-art">Image + Motion</Link>
           <Link to="/music">Sound</Link>
-          <Link to="/store">Store</Link>
           <Link to="/about">About</Link>
           <Link to="/signal-portrait">Signal wall</Link>
         </nav>
         <div className="header-tools">
-          <button type="button" className="signal-portrait-toggle" onClick={() => setPortraitOpen((current) => !current)}>
-            {portraitOpen ? 'Close portrait' : 'Signal portrait'}
-          </button>
           <a className="header-contact" href="mailto:jwpierce14@gmail.com">Contact</a>
         </div>
       </header>
       <main className="page-content">{children}</main>
-      <SignalPortrait open={portraitOpen} onClose={() => setPortraitOpen((current) => !current)} />
+      <SignalPortrait />
       <footer className="site-footer">
         <span>JACOB PIERCE / SOLAR FRIEND SIN0</span>
         <span>ENGINEERING, ART, AND SYSTEMS THINKING</span>
@@ -87,7 +85,12 @@ function Home() {
             <a className="button button-quiet" href="mailto:jwpierce14@gmail.com">Start a conversation</a>
           </div>
         </div>
-        <div className="hero-art preview-square" aria-label="Abstract magenta portfolio preview" role="img">
+        <div
+          className="hero-art preview-square"
+          aria-label="Selected artwork from the image and motion collection"
+          role="img"
+          style={{ backgroundImage: `url(${digitalArtPreviews.theHighPriestess})` }}
+        >
           <span className="hero-stamp">FIELD NOTE 01<br />OBJECT / IMAGE / TOOL</span>
         </div>
       </section>
@@ -104,7 +107,12 @@ function Home() {
         <div className="project-grid">
           {projects.map((project, index) => (
             <article className={`project-card project-card-${index + 1}`} key={project.title}>
-              <Link to={project.href} className={`project-image preview-square ${project.tone}`} aria-label={`Open ${project.title}`} />
+              <Link
+                to={project.href}
+                className={`project-image preview-square ${project.tone}`}
+                aria-label={`Open ${project.title}`}
+                style={{ backgroundImage: `url(${project.image})` }}
+              />
               <div className="project-body"><p className="eyebrow">{project.label}</p><h3>{project.title}</h3><p>{project.description}</p><Link className="text-link" to={project.href}>Read the case study <span aria-hidden="true">↗</span></Link></div>
             </article>
           ))}
@@ -115,7 +123,7 @@ function Home() {
         <div className="section-wrap experience-grid"><div><p className="eyebrow">THE THROUGH-LINE</p><h2>Make the complicated usable.</h2></div><div><p>I have worked across player-facing UI, live-service systems, networked features, build pipelines, and creative tooling. The job changes; the instinct stays the same: clarify the system, make iteration cheap, and ship something people can feel.</p><Link className="text-link" to="/about">More about my practice <span aria-hidden="true">↗</span></Link></div></div>
       </section>
 
-      <section className="section-wrap practice-section"><div className="section-heading"><p className="eyebrow">PRACTICE MAP</p><h2>Four materials, one studio.</h2></div><div className="practice-grid"><Link to="/ceramic-art"><strong>01</strong><span>Ceramics</span><small>Form, surface, object</small></Link><Link to="/digital-physical-art"><strong>02</strong><span>Image</span><small>Symbol, color, motion</small></Link><Link to="/rage-engine"><strong>03</strong><span>Code</span><small>Tools, engines, pipelines</small></Link><Link to="/store"><strong>04</strong><span>Store</span><small>Clay, release, ritual</small></Link></div></section>
+      <section className="section-wrap practice-section"><div className="section-heading"><p className="eyebrow">PRACTICE MAP</p><h2>Three materials, one studio.</h2></div><div className="practice-grid"><Link to="/store"><strong>01</strong><span>Ceramics Store</span><small>Cups, Bowls, Plates</small></Link><Link to="/digital-physical-art"><strong>02</strong><span>Image</span><small>Symbol, color, motion</small></Link><Link to="/rage-engine"><strong>03</strong><span>Code</span><small>Tools, engines, pipelines</small></Link></div></section>
     </>
   );
 }
@@ -125,5 +133,5 @@ function About() {
 }
 
 export default function PortfolioApp() {
-  return <Shell><Routes><Route path="/" element={<Home />} /><Route path="/about" element={<About />} /><Route path="/signal-portrait" element={<SignalPortraitWall />} /><Route path="/ceramic-art" element={<CeramicArtGrid onBack={() => {}} />} /><Route path="/digital-physical-art" element={<DigitalPhysicalArtGrid onBack={() => {}} />} /><Route path="/music" element={<Music onBack={() => {}} />} /><Route path="/store" element={<StoreFront />} /><Route path="/dungeon-deck-recorder" element={<RageEngineShowcase mode="recorder" />} /><Route path="/rage-engine" element={<RageEngineShowcase />} /></Routes></Shell>;
+  return <Shell><Routes><Route path="/" element={<Home />} /><Route path="/about" element={<About />} /><Route path="/signal-portrait" element={<SignalPortraitWall />} /><Route path="/ceramic-art" element={<Navigate to="/store" replace />} /><Route path="/digital-physical-art" element={<DigitalPhysicalArtGrid onBack={() => {}} />} /><Route path="/music" element={<Music onBack={() => {}} />} /><Route path="/store" element={<StoreFront />} /><Route path="/dungeon-deck-recorder" element={<RageEngineShowcase mode="recorder" />} /><Route path="/rage-engine" element={<RageEngineShowcase />} /></Routes></Shell>;
 }

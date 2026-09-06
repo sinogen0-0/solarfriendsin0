@@ -1,8 +1,16 @@
 import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { storeCatalog } from '../data/storeProducts';
+import ceramicArt from '../data/ceramicArt';
 
 const products = storeCatalog;
+
+const soldItems = ceramicArt.map((item) => ({
+  id: `ceramic-${item.id}`,
+  name: item.title,
+  description: item.description,
+  images: item.images && item.images.length ? item.images.map((entry) => entry.imageUrl) : [item.imageUrl],
+  sold: true
+}));
 
 const shippingOptions = [
   { id: 'pickup', label: 'Local pickup', price: 0 },
@@ -26,6 +34,19 @@ const formatMoney = (value) =>
     style: 'currency',
     currency: 'USD'
   }).format(value);
+
+const resolveImageUrl = (image) => {
+  if (!image) return '';
+  if (typeof image === 'string') return image;
+  return image.imageUrl || image.previewUrl || image.src || '';
+};
+
+const normalizeGallery = (images, fallbackImage) => {
+  const source = Array.isArray(images) && images.length ? images : [fallbackImage];
+  return source
+    .map((image) => resolveImageUrl(image))
+    .filter(Boolean);
+};
 
 export default function StoreFront() {
   const [cart, setCart] = useState({});
@@ -68,6 +89,22 @@ export default function StoreFront() {
       ...current,
       [productId]: index
     }));
+  };
+
+  const handleNextImage = (productId, direction) => {
+    setSelectedImages((current) => {
+      const product = products.find((entry) => entry.id === productId);
+      const gallery = normalizeGallery(product?.images, product?.image);
+      const currentIndex = current[productId] ?? 0;
+      const nextIndex = gallery.length
+        ? (currentIndex + direction + gallery.length) % gallery.length
+        : 0;
+
+      return {
+        ...current,
+        [productId]: nextIndex
+      };
+    });
   };
 
   const handleAdjustQuantity = (productId, delta) => {
@@ -139,39 +176,54 @@ export default function StoreFront() {
     <section className="section-wrap store-page">
       <div className="store-intro">
         <div>
-          <p className="eyebrow">STUDIO STORE</p>
-          <h1>Hand-thrown work from the kiln.</h1>
-        </div>
-        <div className="store-actions">
-          <Link className="button button-primary" to="/ceramic-art">Browse the gallery</Link>
-          <a className="button button-quiet" href="mailto:jwpierce14@gmail.com">Contact the studio</a>
+          <p className="eyebrow">CERAMICS STORE</p>
         </div>
       </div>
 
       <div className="store-layout">
         <div className="store-product-grid">
           {products.map((product) => {
-            const gallery = product.images && product.images.length ? product.images : [product.image];
+            const gallery = normalizeGallery(product.images, product.image);
             const mainImage = gallery[selectedImages[product.id] ?? 0] || gallery[0];
 
             return (
               <article className="store-product-card" key={product.id}>
-                <img src={mainImage} alt={product.name} loading="lazy" />
-                {gallery.length > 1 ? (
-                  <div className="product-gallery-strip" aria-label={`${product.name} gallery`}>
-                    {gallery.map((image, index) => (
+                <div className={`product-image-carousel ${gallery.length > 1 ? 'has-carousel' : ''}`} aria-live="polite">
+                  <img src={mainImage} alt={`${product.name} view ${(selectedImages[product.id] ?? 0) + 1}`} loading="lazy" />
+
+                  {gallery.length > 1 ? (
+                    <>
                       <button
-                        key={`${product.id}-${index}`}
                         type="button"
-                        className={`gallery-thumb ${selectedImages[product.id] === index ? 'is-selected' : ''}`}
-                        onClick={() => handleSelectImage(product.id, index)}
-                        aria-label={`View image ${index + 1} for ${product.name}`}
+                        className="carousel-arrow carousel-arrow-prev"
+                        onClick={() => handleNextImage(product.id, -1)}
+                        aria-label={`Previous image for ${product.name}`}
                       >
-                        <img src={image} alt={`${product.name} view ${index + 1}`} />
+                        ‹
                       </button>
-                    ))}
-                  </div>
-                ) : null}
+                      <button
+                        type="button"
+                        className="carousel-arrow carousel-arrow-next"
+                        onClick={() => handleNextImage(product.id, 1)}
+                        aria-label={`Next image for ${product.name}`}
+                      >
+                        ›
+                      </button>
+
+                      <div className="carousel-dots" aria-label={`${product.name} image gallery`}>
+                        {gallery.map((image, index) => (
+                          <button
+                            key={`${product.id}-dot-${index}`}
+                            type="button"
+                            className={`carousel-dot ${selectedImages[product.id] === index ? 'is-active' : ''}`}
+                            onClick={() => handleSelectImage(product.id, index)}
+                            aria-label={`View image ${index + 1} of ${product.name}`}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  ) : null}
+                </div>
                 <div className="store-product-copy">
                   <div className="product-row">
                     <h3>{product.name}</h3>
@@ -186,6 +238,29 @@ export default function StoreFront() {
             );
           })}
         </div>
+
+        {soldItems.length ? (
+          <div className="store-sold-section">
+            <p className="eyebrow">FROM THE ARCHIVE</p>
+            <h2>Older pieces, already found a home.</h2>
+            <div className="store-product-grid store-sold-grid">
+              {soldItems.map((item) => (
+                <article className="store-product-card is-sold" key={item.id}>
+                  <div className="sold-image-wrap">
+                    <img src={item.images[0]} alt={item.name} loading="lazy" />
+                    <span className="sold-badge">Sold</span>
+                  </div>
+                  <div className="store-product-copy">
+                    <div className="product-row">
+                      <h3>{item.name}</h3>
+                    </div>
+                    <p>{item.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        ) : null}
 
         <aside className="cart-panel">
           <h2>Cart</h2>

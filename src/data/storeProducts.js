@@ -23,6 +23,13 @@ import pot26 from '../images/store/DSC_0026.JPG';
 import pot27 from '../images/store/DSC_0027.JPG';
 import pot28 from '../images/store/DSC_0028.JPG';
 
+import { storePreviews } from './previews';
+
+const withPreview = (imageUrl, previewUrl) => ({
+  imageUrl,
+  previewUrl: previewUrl || imageUrl
+});
+
 const products = [
   {
     id: 'plate-green_white',
@@ -30,7 +37,7 @@ const products = [
     title: 'Green & White Plate',
     price: 115,
     image: pot01,
-    images: [pot01, pot04],
+    images: [withPreview(pot01, storePreviews.pot01), withPreview(pot04, storePreviews.pot04)],
     description: 'Smooth flat and glossy finish, with a cream sig on the inside and forest green on the outside. Clear coat glaze pools in the plates inner ring forming a faint green shadow.'
   },
   {
@@ -39,7 +46,7 @@ const products = [
     title: 'Pink Pattern Platter',
     price: 165,
     image: pot06,
-    images: [pot06],
+    images: [withPreview(pot06, storePreviews.pot06)],
     description: 'A smooth and glossy decorative platter. Patterned with a sin0 graphic print, and pink crystalline glaze.'
   },
   {
@@ -48,7 +55,7 @@ const products = [
     title: 'Cancer Spell Bowl',
     price: 185,
     image: pot07,
-    images: [pot07, pot08],
+    images: [withPreview(pot07, storePreviews.pot07), withPreview(pot08, storePreviews.pot08)],
     description: 'Hand-built bowl with three feet. Light blue sig application, with carving spell reliefs in dark blue.'
   },
   {
@@ -57,7 +64,7 @@ const products = [
     title: 'Dark Blue Carved Bowl',
     price: 115,
     image: pot09,
-    images: [pot09],
+    images: [withPreview(pot09, storePreviews.pot09)],
     description: 'Raw white clay exterior, with smooth glassy glaze over dark blue sig and carved graphic prints.'
   },
   {
@@ -66,7 +73,7 @@ const products = [
     title: 'Sea Monster Bowl',
     price: 155,
     image: pot11,
-    images: [pot11, pot12, pot14],
+    images: [withPreview(pot11, storePreviews.pot11), withPreview(pot12, storePreviews.pot12), withPreview(pot14, storePreviews.pot14)],
     description: 'Hand built bowl with sea monster face and tail, light blue sig exterior and four small feet, and dark blue sig inside with white sig flower.'
   },
   {
@@ -75,7 +82,7 @@ const products = [
     title: 'Scythin Deer, Tri-skellion Rabbit Cup',
     price: 300,
     image: pot16,
-    images: [pot16, pot17],
+    images: [withPreview(pot16, storePreviews.pot16), withPreview(pot17, storePreviews.pot17)],
     description: 'A sleek cup, with underglaze scything deer motif and tri-skellion rabbit on either side of the cup.'
   },
   {
@@ -84,7 +91,7 @@ const products = [
     title: 'Bard Band Cup',
     price: 95,
     image: pot18,
-    images: [pot18, pot19],
+    images: [withPreview(pot18, storePreviews.pot18), withPreview(pot19, storePreviews.pot19)],
     description: 'Animal motifs playing instruments, blobbed crystalline flake glaze cup.'
   },
   {
@@ -93,7 +100,7 @@ const products = [
     title: 'Squirrel Cup',
     price: 45,
     image: pot20,
-    images: [pot20],
+    images: [withPreview(pot20, storePreviews.pot20)],
     description: 'A small cup with a motif saying, "The way we live is wrong. RIP squirrel."'
   },
   {
@@ -102,7 +109,7 @@ const products = [
     title: 'River Cup',
     price: 85,
     image: pot21,
-    images: [pot21, pot22],
+    images: [withPreview(pot21, storePreviews.pot21), withPreview(pot22, storePreviews.pot22)],
     description: 'Hand molded and carved cup that has a water holding spell and plant/sun/moon motif'
   },
   {
@@ -111,7 +118,7 @@ const products = [
     title: 'Serpent Cup',
     price: 45,
     image: pot23,
-    images: [pot23, pot24],
+    images: [withPreview(pot23, storePreviews.pot23), withPreview(pot24, storePreviews.pot24)],
     description: 'A medievel tree of eden motif, and a serpent. 6oz water cup.'
   },
   {
@@ -120,7 +127,7 @@ const products = [
     title: 'Grass Cup',
     price: 45,
     image: pot25,
-    images: [pot25],
+    images: [withPreview(pot25, storePreviews.pot25)],
     description: 'A hand thrown and carved cup with green sig sin0 motif.'
   },
   {
@@ -129,7 +136,7 @@ const products = [
     title: 'Sharp Sand Cup',
     price: 45,
     image: pot26,
-    images: [pot26],
+    images: [withPreview(pot26, storePreviews.pot26)],
     description: 'geometric parabolic shaped cup with sand colored glaze'
   },
   {
@@ -138,7 +145,7 @@ const products = [
     title: 'Friend Cup',
     price: 75,
     image: pot27,
-    images: [pot27, pot28],
+    images: [withPreview(pot27, storePreviews.pot27), withPreview(pot28, storePreviews.pot28)],
     description: 'a little friendly face, and some circular motifs.'
   }
 ];
