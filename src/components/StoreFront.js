@@ -35,6 +35,19 @@ const formatMoney = (value) =>
     currency: 'USD'
   }).format(value);
 
+const resolveImageUrl = (image) => {
+  if (!image) return '';
+  if (typeof image === 'string') return image;
+  return image.imageUrl || image.previewUrl || image.src || '';
+};
+
+const normalizeGallery = (images, fallbackImage) => {
+  const source = Array.isArray(images) && images.length ? images : [fallbackImage];
+  return source
+    .map((image) => resolveImageUrl(image))
+    .filter(Boolean);
+};
+
 export default function StoreFront() {
   const [cart, setCart] = useState({});
   const [form, setForm] = useState(defaultForm);
@@ -81,11 +94,10 @@ export default function StoreFront() {
   const handleNextImage = (productId, direction) => {
     setSelectedImages((current) => {
       const product = products.find((entry) => entry.id === productId);
-      const gallery = product && product.images && product.images.length ? product.images : [product?.image];
-      const validGallery = gallery.filter(Boolean);
+      const gallery = normalizeGallery(product?.images, product?.image);
       const currentIndex = current[productId] ?? 0;
-      const nextIndex = validGallery.length
-        ? (currentIndex + direction + validGallery.length) % validGallery.length
+      const nextIndex = gallery.length
+        ? (currentIndex + direction + gallery.length) % gallery.length
         : 0;
 
       return {
@@ -171,13 +183,13 @@ export default function StoreFront() {
       <div className="store-layout">
         <div className="store-product-grid">
           {products.map((product) => {
-            const gallery = product.images && product.images.length ? product.images : [product.image];
+            const gallery = normalizeGallery(product.images, product.image);
             const mainImage = gallery[selectedImages[product.id] ?? 0] || gallery[0];
 
             return (
               <article className="store-product-card" key={product.id}>
                 <div className={`product-image-carousel ${gallery.length > 1 ? 'has-carousel' : ''}`} aria-live="polite">
-                  <img src={mainImage} alt={`${product.name} view ${selectedImages[product.id] + 1 || 1}`} loading="lazy" />
+                  <img src={mainImage} alt={`${product.name} view ${(selectedImages[product.id] ?? 0) + 1}`} loading="lazy" />
 
                   {gallery.length > 1 ? (
                     <>

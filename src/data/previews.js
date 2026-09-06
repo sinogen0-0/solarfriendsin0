@@ -56,6 +56,31 @@ import lastHumanThumb from '../images/previews/music/thelasthumanwillbeakinginsp
 
 import physicalArt1Thumb from '../images/previews/physical_art/000-thumb.webp';
 
+import storePot01Thumb from '../images/previews/store/dsc-0001-thumb.webp';
+import storePot04Thumb from '../images/previews/store/dsc-0004-thumb.webp';
+import storePot06Thumb from '../images/previews/store/dsc-0006-thumb.webp';
+import storePot07Thumb from '../images/previews/store/dsc-0007-thumb.webp';
+import storePot08Thumb from '../images/previews/store/dsc-0008-thumb.webp';
+import storePot09Thumb from '../images/previews/store/dsc-0009-thumb.webp';
+import storePot10Thumb from '../images/previews/store/dsc-0010-thumb.webp';
+import storePot11Thumb from '../images/previews/store/dsc-0011-thumb.webp';
+import storePot12Thumb from '../images/previews/store/dsc-0012-thumb.webp';
+import storePot14Thumb from '../images/previews/store/dsc-0014-thumb.webp';
+import storePot15Thumb from '../images/previews/store/dsc-0015-thumb.webp';
+import storePot16Thumb from '../images/previews/store/dsc-0016-thumb.webp';
+import storePot17Thumb from '../images/previews/store/dsc-0017-thumb.webp';
+import storePot18Thumb from '../images/previews/store/dsc-0018-thumb.webp';
+import storePot19Thumb from '../images/previews/store/dsc-0019-thumb.webp';
+import storePot20Thumb from '../images/previews/store/dsc-0020-thumb.webp';
+import storePot21Thumb from '../images/previews/store/dsc-0021-thumb.webp';
+import storePot22Thumb from '../images/previews/store/dsc-0022-thumb.webp';
+import storePot23Thumb from '../images/previews/store/dsc-0023-thumb.webp';
+import storePot24Thumb from '../images/previews/store/dsc-0024-thumb.webp';
+import storePot25Thumb from '../images/previews/store/dsc-0025-thumb.webp';
+import storePot26Thumb from '../images/previews/store/dsc-0026-thumb.webp';
+import storePot27Thumb from '../images/previews/store/dsc-0027-thumb.webp';
+import storePot28Thumb from '../images/previews/store/dsc-0028-thumb.webp';
+
 export const ceramicPreviews = {
   img1: ceramic1Thumb,
   img2: ceramic2Thumb,
@@ -120,4 +145,31 @@ export const musicPreviews = {
 
 export const physicalArtPreviews = {
   physicalArt1: physicalArt1Thumb
+};
+
+export const storePreviews = {
+  pot01: storePot01Thumb,
+  pot04: storePot04Thumb,
+  pot06: storePot06Thumb,
+  pot07: storePot07Thumb,
+  pot08: storePot08Thumb,
+  pot09: storePot09Thumb,
+  pot10: storePot10Thumb,
+  pot11: storePot11Thumb,
+  pot12: storePot12Thumb,
+  pot14: storePot14Thumb,
+  pot15: storePot15Thumb,
+  pot16: storePot16Thumb,
+  pot17: storePot17Thumb,
+  pot18: storePot18Thumb,
+  pot19: storePot19Thumb,
+  pot20: storePot20Thumb,
+  pot21: storePot21Thumb,
+  pot22: storePot22Thumb,
+  pot23: storePot23Thumb,
+  pot24: storePot24Thumb,
+  pot25: storePot25Thumb,
+  pot26: storePot26Thumb,
+  pot27: storePot27Thumb,
+  pot28: storePot28Thumb
 };

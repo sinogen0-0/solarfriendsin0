@@ -8,7 +8,7 @@ ffmpeg.setFfmpegPath(ffmpegPath);
 
 const SOURCE_ROOT = path.resolve(__dirname, '../src/images');
 const PREVIEW_ROOT = path.resolve(__dirname, '../src/images/previews');
-const TARGET_FOLDERS = ['ceramics', 'digital_art', 'music', 'physical_art'];
+const TARGET_FOLDERS = ['ceramics', 'digital_art', 'music', 'physical_art', 'store'];
 const IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png']);
 const VIDEO_EXTENSIONS = new Set(['.mp4', '.mov', '.webm', '.m4v', '.mkv', '.avi']);
 const SUPPORTED_EXTENSIONS = new Set([...IMAGE_EXTENSIONS, ...VIDEO_EXTENSIONS]);
