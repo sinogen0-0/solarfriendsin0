@@ -78,6 +78,23 @@ export default function StoreFront() {
     }));
   };
 
+  const handleNextImage = (productId, direction) => {
+    setSelectedImages((current) => {
+      const product = products.find((entry) => entry.id === productId);
+      const gallery = product && product.images && product.images.length ? product.images : [product?.image];
+      const validGallery = gallery.filter(Boolean);
+      const currentIndex = current[productId] ?? 0;
+      const nextIndex = validGallery.length
+        ? (currentIndex + direction + validGallery.length) % validGallery.length
+        : 0;
+
+      return {
+        ...current,
+        [productId]: nextIndex
+      };
+    });
+  };
+
   const handleAdjustQuantity = (productId, delta) => {
     setCart((current) => {
       const nextQuantity = (current[productId] || 0) + delta;
@@ -159,22 +176,42 @@ export default function StoreFront() {
 
             return (
               <article className="store-product-card" key={product.id}>
-                <img src={mainImage} alt={product.name} loading="lazy" />
-                {gallery.length > 1 ? (
-                  <div className="product-gallery-strip" aria-label={`${product.name} gallery`}>
-                    {gallery.map((image, index) => (
+                <div className={`product-image-carousel ${gallery.length > 1 ? 'has-carousel' : ''}`} aria-live="polite">
+                  <img src={mainImage} alt={`${product.name} view ${selectedImages[product.id] + 1 || 1}`} loading="lazy" />
+
+                  {gallery.length > 1 ? (
+                    <>
                       <button
-                        key={`${product.id}-${index}`}
                         type="button"
-                        className={`gallery-thumb ${selectedImages[product.id] === index ? 'is-selected' : ''}`}
-                        onClick={() => handleSelectImage(product.id, index)}
-                        aria-label={`View image ${index + 1} for ${product.name}`}
+                        className="carousel-arrow carousel-arrow-prev"
+                        onClick={() => handleNextImage(product.id, -1)}
+                        aria-label={`Previous image for ${product.name}`}
                       >
-                        <img src={image} alt={`${product.name} view ${index + 1}`} />
+                        ‹
                       </button>
-                    ))}
-                  </div>
-                ) : null}
+                      <button
+                        type="button"
+                        className="carousel-arrow carousel-arrow-next"
+                        onClick={() => handleNextImage(product.id, 1)}
+                        aria-label={`Next image for ${product.name}`}
+                      >
+                        ›
+                      </button>
+
+                      <div className="carousel-dots" aria-label={`${product.name} image gallery`}>
+                        {gallery.map((image, index) => (
+                          <button
+                            key={`${product.id}-dot-${index}`}
+                            type="button"
+                            className={`carousel-dot ${selectedImages[product.id] === index ? 'is-active' : ''}`}
+                            onClick={() => handleSelectImage(product.id, index)}
+                            aria-label={`View image ${index + 1} of ${product.name}`}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  ) : null}
+                </div>
                 <div className="store-product-copy">
                   <div className="product-row">
                     <h3>{product.name}</h3>

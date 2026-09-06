@@ -6,6 +6,7 @@ import RageEngineShowcase from './components/RageEngineShowcase';
 import SignalPortrait from './components/SignalPortrait';
 import SignalPortraitWall from './components/SignalPortraitWall';
 import StoreFront from './components/StoreFront';
+import { digitalArtPreviews } from './data/previews';
 import './styles/Portfolio.css';
 
 const projects = [
@@ -14,21 +15,24 @@ const projects = [
     label: 'Graphics / Tools / AI workflows',
     description: 'A custom C and raylib engine with generated asset catalogs, hot reload, cross-platform build tooling, and a documented agentic content pipeline.',
     href: '/rage-engine',
-    tone: 'magenta'
+    tone: 'magenta',
+    image: digitalArtPreviews.digitalForm
   },
   {
     title: 'WWE 2K',
     label: 'AAA UI systems / C++',
     description: 'Five consecutive annual console releases, including cross-platform character customization, Common UI systems, defect triage, and designer-facing tooling.',
     href: '#experience',
-    tone: 'magenta'
+    tone: 'magenta',
+    image: digitalArtPreviews.face
   },
   {
     title: 'Dungeon Deck Recorder',
     label: 'Product engineering / Svelte',
     description: 'An offline-first tabletop session tool that brings recording, transcription, entity extraction, and searchable dossiers into one focused workflow.',
     href: '/dungeon-deck-recorder',
-    tone: 'magenta'
+    tone: 'magenta',
+    image: digitalArtPreviews.ticket3
   }
 ];
 
@@ -81,7 +85,12 @@ function Home() {
             <a className="button button-quiet" href="mailto:jwpierce14@gmail.com">Start a conversation</a>
           </div>
         </div>
-        <div className="hero-art preview-square" aria-label="Abstract magenta portfolio preview" role="img">
+        <div
+          className="hero-art preview-square"
+          aria-label="Selected artwork from the image and motion collection"
+          role="img"
+          style={{ backgroundImage: `url(${digitalArtPreviews.theHighPriestess})` }}
+        >
           <span className="hero-stamp">FIELD NOTE 01<br />OBJECT / IMAGE / TOOL</span>
         </div>
       </section>
@@ -98,7 +107,12 @@ function Home() {
         <div className="project-grid">
           {projects.map((project, index) => (
             <article className={`project-card project-card-${index + 1}`} key={project.title}>
-              <Link to={project.href} className={`project-image preview-square ${project.tone}`} aria-label={`Open ${project.title}`} />
+              <Link
+                to={project.href}
+                className={`project-image preview-square ${project.tone}`}
+                aria-label={`Open ${project.title}`}
+                style={{ backgroundImage: `url(${project.image})` }}
+              />
               <div className="project-body"><p className="eyebrow">{project.label}</p><h3>{project.title}</h3><p>{project.description}</p><Link className="text-link" to={project.href}>Read the case study <span aria-hidden="true">↗</span></Link></div>
             </article>
           ))}
