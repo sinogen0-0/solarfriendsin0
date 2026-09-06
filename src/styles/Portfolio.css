@@ -86,7 +86,8 @@ body { transition: background .2s ease, color .2s ease; }
 .sold-badge { background: rgba(20, 18, 25, .85); border: 1px solid rgba(244, 240, 232, .35); color: var(--ink); font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .08em; padding: .35rem .6rem; position: absolute; right: .7rem; top: .7rem; text-transform: uppercase; }
 .store-product-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .store-product-card { background: rgba(255, 255, 255, .03); border: 1px solid var(--line); overflow: hidden; }
-.store-product-card > img, .sold-image-wrap img { aspect-ratio: 1 / 1; display: block; height: auto; object-fit: cover; width: 100%; }
+.product-image-carousel { position: relative; }
+.product-image-carousel img, .store-product-card > img, .sold-image-wrap img { aspect-ratio: 1 / 1; display: block; height: 100%; object-fit: cover; width: 100%; }
 .product-gallery-strip { display: flex; gap: .5rem; padding: .6rem; }
 .gallery-thumb { background: none; border: 1px solid rgba(244, 240, 232, .16); cursor: pointer; overflow: hidden; padding: 0; width: 56px; height: 56px; }
 .gallery-thumb img { display: block; height: 100%; object-fit: cover; width: 100%; }
