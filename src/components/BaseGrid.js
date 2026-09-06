@@ -116,9 +116,6 @@ const BaseGrid = ({ data, onBack }) => {
 
     return (
         <div>
-            <button className="artist-info-button" onClick={onBack} style={{ margin: '20px' }}>
-                Back to Enchantments
-            </button>
             <div className="pottery-grid">
                 {data.map(item => (
                     <GridCard

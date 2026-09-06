@@ -148,7 +148,6 @@ export default function StoreFront() {
       <div className="store-intro">
         <div>
           <p className="eyebrow">CERAMICS STORE</p>
-          <h1>Hand-thrown work from the kiln.</h1>
         </div>
       </div>
 

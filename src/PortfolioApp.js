@@ -109,7 +109,7 @@ function Home() {
         <div className="section-wrap experience-grid"><div><p className="eyebrow">THE THROUGH-LINE</p><h2>Make the complicated usable.</h2></div><div><p>I have worked across player-facing UI, live-service systems, networked features, build pipelines, and creative tooling. The job changes; the instinct stays the same: clarify the system, make iteration cheap, and ship something people can feel.</p><Link className="text-link" to="/about">More about my practice <span aria-hidden="true">↗</span></Link></div></div>
       </section>
 
-      <section className="section-wrap practice-section"><div className="section-heading"><p className="eyebrow">PRACTICE MAP</p><h2>Three materials, one studio.</h2></div><div className="practice-grid"><Link to="/store"><strong>01</strong><span>Ceramics Store</span><small>Form, surface, release, ritual</small></Link><Link to="/digital-physical-art"><strong>02</strong><span>Image</span><small>Symbol, color, motion</small></Link><Link to="/rage-engine"><strong>03</strong><span>Code</span><small>Tools, engines, pipelines</small></Link></div></section>
+      <section className="section-wrap practice-section"><div className="section-heading"><p className="eyebrow">PRACTICE MAP</p><h2>Three materials, one studio.</h2></div><div className="practice-grid"><Link to="/store"><strong>01</strong><span>Ceramics Store</span><small>Cups, Bowls, Plates</small></Link><Link to="/digital-physical-art"><strong>02</strong><span>Image</span><small>Symbol, color, motion</small></Link><Link to="/rage-engine"><strong>03</strong><span>Code</span><small>Tools, engines, pipelines</small></Link></div></section>
     </>
   );
 }
