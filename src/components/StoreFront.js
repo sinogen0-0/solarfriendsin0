@@ -188,8 +188,27 @@ export default function StoreFront() {
 
             return (
               <article className="store-product-card" key={product.id}>
-                <div className={`product-image-carousel ${gallery.length > 1 ? 'has-carousel' : ''}`} aria-live="polite">
-                  <img src={mainImage} alt={`${product.name} view ${(selectedImages[product.id] ?? 0) + 1}`} loading="lazy" />
+                <div
+                  className={`product-image-carousel ${gallery.length > 1 ? 'has-carousel' : ''}`}
+                  aria-live="polite"
+                >
+                  <img
+                    src={mainImage}
+                    alt={`${product.name} view ${(selectedImages[product.id] ?? 0) + 1}`}
+                    loading="lazy"
+                    onClick={() => gallery.length > 1 && handleNextImage(product.id, 1)}
+                    onKeyDown={(event) => {
+                      if (!gallery.length || !(event.key === 'Enter' || event.key === ' ')) {
+                        return;
+                      }
+
+                      event.preventDefault();
+                      handleNextImage(product.id, 1);
+                    }}
+                    tabIndex={gallery.length > 1 ? 0 : -1}
+                    role={gallery.length > 1 ? 'button' : undefined}
+                    aria-label={gallery.length > 1 ? `Cycle to next image for ${product.name}` : undefined}
+                  />
 
                   {gallery.length > 1 ? (
                     <>
